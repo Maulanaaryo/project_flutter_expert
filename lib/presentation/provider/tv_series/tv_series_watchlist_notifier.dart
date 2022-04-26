@@ -24,9 +24,9 @@ class TvSeriesWatchlistNotifier extends ChangeNotifier {
     final result = await getWatchlistTvSeries.execute();
     result.fold(
       (failure) {
-        _watchlistTvState = RequestState.Empty;
+        _watchlistTvState = RequestState.Error;
+        _message = failure.message;
         notifyListeners();
-        return _message = 'Data Not Found';
       },
       (tvData) {
         _watchlistTvState = RequestState.Loaded;
