@@ -7,6 +7,8 @@ import 'package:provider/provider.dart';
 import 'package:search/search.dart';
 
 class HomeMoviePage extends StatefulWidget {
+  const HomeMoviePage({Key? key}) : super(key: key);
+
   @override
   _HomeMoviePageState createState() => _HomeMoviePageState();
 }

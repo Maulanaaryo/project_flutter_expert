@@ -1,5 +1,6 @@
 name: about
 description: A new Flutter package project.
+publish_to: none
 version: 0.0.1
 homepage:
 
@@ -13,10 +14,6 @@ dependencies:
   
   core:
     path: ../core
-  movie:
-    path: ../movie
-  tvseries:
-    path: ../tvseries
     
 dev_dependencies:
   flutter_test:

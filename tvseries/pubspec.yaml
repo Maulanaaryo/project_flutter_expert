@@ -1,5 +1,6 @@
 name: tvseries
 description: A new Flutter package project.
+publish_to: none
 version: 0.0.1
 homepage:
 
@@ -35,6 +36,9 @@ dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
+  mockito: ^5.2.0
+  build_runner: ^2.1.11
+  test_cov_console: ^0.2.2
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
