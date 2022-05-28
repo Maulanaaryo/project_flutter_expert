@@ -1,34 +1,13 @@
-import 'package:ditonton/common/constants.dart';
-import 'package:ditonton/common/utils.dart';
-import 'package:ditonton/presentation/pages/about_page.dart';
-import 'package:ditonton/presentation/pages/movie/movie_detail_page.dart';
-import 'package:ditonton/presentation/pages/movie/home_movie_page.dart';
-import 'package:ditonton/presentation/pages/movie/popular_movies_page.dart';
-import 'package:ditonton/presentation/pages/movie/search_page.dart';
-import 'package:ditonton/presentation/pages/movie/top_rated_movies_page.dart';
-import 'package:ditonton/presentation/pages/movie/watchlist_movies_page.dart';
-import 'package:ditonton/presentation/pages/tv_series/tv_series_detail_page.dart';
-import 'package:ditonton/presentation/pages/tv_series/tv_series_home_page.dart';
-import 'package:ditonton/presentation/pages/tv_series/tv_series_popular_page.dart';
-import 'package:ditonton/presentation/pages/tv_series/tv_series_search_page.dart';
-import 'package:ditonton/presentation/pages/tv_series/tv_series_top_rated_page.dart';
-import 'package:ditonton/presentation/pages/tv_series/tv_series_watchlist_page.dart';
-import 'package:ditonton/presentation/provider/movie/movie_detail_notifier.dart';
-import 'package:ditonton/presentation/provider/movie/movie_list_notifier.dart';
-import 'package:ditonton/presentation/provider/movie/movie_search_notifier.dart';
-import 'package:ditonton/presentation/provider/movie/popular_movies_notifier.dart';
-import 'package:ditonton/presentation/provider/movie/top_rated_movies_notifier.dart';
-import 'package:ditonton/presentation/provider/movie/watchlist_movie_notifier.dart';
-import 'package:ditonton/presentation/provider/tv_series/tv_series_detail_notifier.dart';
-import 'package:ditonton/presentation/provider/tv_series/tv_series_list_notifier.dart';
-import 'package:ditonton/presentation/provider/tv_series/tv_series_popular_notifier.dart';
-import 'package:ditonton/presentation/provider/tv_series/tv_series_search_notifier.dart';
-import 'package:ditonton/presentation/provider/tv_series/tv_series_top_rated_notifier.dart';
-import 'package:ditonton/presentation/provider/tv_series/tv_series_watchlist_notifier.dart';
+import 'package:about/about.dart';
+import 'package:core/core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:movie/movie.dart';
 import 'package:provider/provider.dart';
 import 'package:ditonton/injection.dart' as di;
+import 'package:search/search.dart';
+import 'package:tvseries/tvseries.dart';
+import 'splash_screen.dart';
 
 void main() {
   di.init();
@@ -85,17 +64,17 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: kRichBlack,
           textTheme: kTextTheme,
         ),
-        home: HomeMoviePage(),
+        home: SplashScreen(),
         navigatorObservers: [routeObserver],
         onGenerateRoute: (RouteSettings settings) {
           switch (settings.name) {
             case '/home':
               return MaterialPageRoute(builder: (_) => HomeMoviePage());
-            case PopularMoviesPage.ROUTE_NAME:
+            case PopularMoviesPage.routeName:
               return CupertinoPageRoute(builder: (_) => PopularMoviesPage());
-            case TopRatedMoviesPage.ROUTE_NAME:
+            case TopRatedMoviesPage.routeName:
               return CupertinoPageRoute(builder: (_) => TopRatedMoviesPage());
-            case MovieDetailPage.ROUTE_NAME:
+            case MovieDetailPage.routeName:
               final id = settings.arguments as int;
               return MaterialPageRoute(
                 builder: (_) => MovieDetailPage(id: id),
@@ -103,27 +82,29 @@ class MyApp extends StatelessWidget {
               );
             case '/tv-home-series':
               return MaterialPageRoute(builder: (_) => TvSeriesHomePage());
-            case TvSeriesPopularPage.ROUTE_NAME:
+            case TvSeriesPopularPage.routeName:
               return CupertinoPageRoute(builder: (_) => TvSeriesPopularPage());
-            case TvSeriesTopRatedPage.ROUTE_NAME:
+            case TvSeriesTopRatedPage.routeName:
               return CupertinoPageRoute(builder: (_) => TvSeriesTopRatedPage());
-            case TvSeriesDetailPage.ROUTE_NAME:
+            case TvSeriesDetailPage.routeName:
               final id = settings.arguments as int;
               return MaterialPageRoute(
                 builder: (_) => TvSeriesDetailPage(id: id),
                 settings: settings,
               );
-            case SearchPage.ROUTE_NAME:
+            case SearchPage.routeName:
               return CupertinoPageRoute(builder: (_) => SearchPage());
-            case TvSeriesSearchPage.ROUTE_NAME:
+            case TvSeriesSearchPage.routeName:
               return CupertinoPageRoute(builder: (_) => TvSeriesSearchPage());
-            case WatchlistMoviesPage.ROUTE_NAME:
+            case WatchlistMoviesPage.routeName:
               return MaterialPageRoute(builder: (_) => WatchlistMoviesPage());
-            case TvSeriesWatchlistPage.ROUTE_NAME:
+            case TvSeriesWatchlistPage.routeName:
               return CupertinoPageRoute(
                   builder: (_) => TvSeriesWatchlistPage());
-            case AboutPage.ROUTE_NAME:
+            case AboutPage.routeName:
               return MaterialPageRoute(builder: (_) => AboutPage());
+            case SplashScreen.routeName:
+            return MaterialPageRoute(builder: (_) => SplashScreen());
             default:
               return MaterialPageRoute(builder: (_) {
                 return Scaffold(
