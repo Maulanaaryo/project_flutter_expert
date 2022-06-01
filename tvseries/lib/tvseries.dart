@@ -27,16 +27,17 @@ export 'domain/usecases/get_watchlist_tv_series.dart';
 export 'domain/usecases/remove_watchlist_tv_series.dart';
 export 'domain/usecases/save_watchlist_tv_series.dart';
 
-export 'pages/tv_series_detail_page.dart';
-export 'pages/tv_series_home_page.dart';
-export 'pages/tv_series_popular_page.dart';
-export 'pages/tv_series_top_rated_page.dart';
-export 'pages/tv_series_watchlist_page.dart';
+export 'presentation/bloc/tvseries_detail/tvs_detail_bloc.dart';
+export 'presentation/bloc/tvseries_on_air/tvs_on_air_bloc.dart';
+export 'presentation/bloc/tvseries_popular/tvs_popular_bloc.dart';
+export 'presentation/bloc/tvseries_recommendation/tvs_recommendation_bloc.dart';
+export 'presentation/bloc/tvseries_top_rated/tvs_top_rated_bloc.dart';
+export 'presentation/bloc/tvseries_watchlist/tvs_watchlist_bloc.dart';
 
-export 'provider/tv_series_detail_notifier.dart';
-export 'provider/tv_series_list_notifier.dart';
-export 'provider/tv_series_popular_notifier.dart';
-export 'provider/tv_series_top_rated_notifier.dart';
-export 'provider/tv_series_watchlist_notifier.dart';
+export 'presentation/pages/tv_series_detail_page.dart';
+export 'presentation/pages/tv_series_home_page.dart';
+export 'presentation/pages/tv_series_popular_page.dart';
+export 'presentation/pages/tv_series_top_rated_page.dart';
+export 'presentation/pages/tv_series_watchlist_page.dart';
 
 export 'widgets/tv_series_card_list.dart';

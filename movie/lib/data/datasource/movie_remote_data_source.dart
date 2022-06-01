@@ -12,6 +12,7 @@ abstract class MovieRemoteDataSource {
   Future<MovieDetailResponse> getMovieDetail(int id);
   Future<List<MovieModel>> getMovieRecommendations(int id);
   Future<List<MovieModel>> searchMovies(String query);
+  
 }
 
 class MovieRemoteDataSourceImpl implements MovieRemoteDataSource {

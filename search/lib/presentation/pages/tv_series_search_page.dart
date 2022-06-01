@@ -1,6 +1,6 @@
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:search/search.dart';
 import 'package:tvseries/tvseries.dart';
 
@@ -21,9 +21,8 @@ class TvSeriesSearchPage extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextField(
-              onSubmitted: (query) {
-                Provider.of<TvSeriesSearchNotifier>(context, listen: false)
-                    .fetchTvSearch(query);
+              onChanged: (query) {
+                context.read<TvsSearchBloc>().add(OnQueryChangedTv(query));
               },
               decoration: const InputDecoration(
                 hintText: 'Search title',
@@ -37,22 +36,33 @@ class TvSeriesSearchPage extends StatelessWidget {
               'Search Result',
               style: kHeading6,
             ),
-            Consumer<TvSeriesSearchNotifier>(
-              builder: (context, data, child) {
-                if (data.state == RequestState.Loading) {
+            BlocBuilder<TvsSearchBloc, TvsSearchState>(
+              builder: (context, state) {
+                if (state is TvsSearchLoading) {
                   return const Center(
                     child: CircularProgressIndicator(),
                   );
-                } else if (data.state == RequestState.Loaded) {
-                  final result = data.searchTvResult;
+                } else if (state is TvsSearchHasData) {
+                  final result = state.result;
                   return Expanded(
                     child: ListView.builder(
                       padding: const EdgeInsets.all(8),
                       itemBuilder: (context, index) {
-                        final tv = data.searchTvResult[index];
+                        final tv = result[index];
                         return TvSeriesCard(tv);
                       },
                       itemCount: result.length,
+                    ),
+                  );
+                } else if (state is TvsSearchHasError) {
+                  return Expanded(
+                    child: Center(
+                      child: Text(
+                        state.message,
+                        style: const TextStyle(
+                          fontSize: 20,
+                        ),
+                      ),
                     ),
                   );
                 } else {

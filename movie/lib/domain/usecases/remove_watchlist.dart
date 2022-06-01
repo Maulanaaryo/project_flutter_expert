@@ -8,7 +8,6 @@ class RemoveWatchlist {
   RemoveWatchlist(this.repository);
 
   Future<Either<Failure, String>> execute(MovieDetail movie) {
-
     return repository.removeWatchlist(movie);
   }
 }

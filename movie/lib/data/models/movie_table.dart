@@ -2,7 +2,6 @@ import 'package:equatable/equatable.dart';
 import 'package:movie/movie.dart';
 
 class MovieTable extends Equatable {
-
   final int id;
   final String? title;
   final String? posterPath;

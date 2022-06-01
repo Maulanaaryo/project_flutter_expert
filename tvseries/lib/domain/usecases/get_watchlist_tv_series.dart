@@ -3,6 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:tvseries/tvseries.dart';
 
 class GetWatchlistTvSeries {
+  
   final TvRepository _repository;
 
   GetWatchlistTvSeries(this._repository);

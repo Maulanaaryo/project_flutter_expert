@@ -2,7 +2,6 @@ import 'package:core/core.dart';
 import 'package:tvseries/tvseries.dart';
 
 abstract class TvsLocalDataSource {
-
   Future<String> insertWatchlistTv(TvTable tv);
   Future<String> removeWatchlistTv(TvTable tv);
   Future<TvTable?> getTvById(int id);

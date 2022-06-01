@@ -56,6 +56,7 @@ class TvSeriesModel extends Equatable {
         "vote_average": voteAverage,
         "vote_count": voteCount,
       };
+      
   TvSeries toEntity() {
     return TvSeries(
       backdropPath: backdropPath,

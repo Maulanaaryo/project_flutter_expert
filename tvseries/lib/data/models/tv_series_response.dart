@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-
 import 'package:tvseries/tvseries.dart';
 
 class TvSeriesResponse extends Equatable {

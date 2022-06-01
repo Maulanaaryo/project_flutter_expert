@@ -1,64 +1,66 @@
-import 'package:core/core.dart';
+import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:mockito/annotations.dart';
-import 'package:mockito/mockito.dart';
-import 'package:provider/provider.dart';
+import 'package:mocktail/mocktail.dart';
 import 'package:tvseries/tvseries.dart';
 
-import 'tv_series_top_rated_page_test.mocks.dart';
+class MockTvsTopRatedBloc extends MockBloc<TvsTopRatedEvent,TvsTopRatedState> implements TvsTopRatedBloc {}
+class FakeTvsTopRatedEvent extends Fake implements TvsTopRatedEvent {}
+class FakeTvsTopRatedState extends Fake implements TvsTopRatedState {}
 
-@GenerateMocks([TvSeriesTopRatedNotifier])
 void main() {
-  late MockTvSeriesTopRatedNotifier mockNotifier;
+  late MockTvsTopRatedBloc mockTvsTopRatedBloc;
 
   setUp(() {
-    mockNotifier = MockTvSeriesTopRatedNotifier();
+    mockTvsTopRatedBloc = MockTvsTopRatedBloc();
+  });
+
+  setUpAll(() {
+    registerFallbackValue(FakeTvsTopRatedEvent());
+    registerFallbackValue(FakeTvsTopRatedState());
+  });
+
+  tearDown(() {
+    mockTvsTopRatedBloc.close();
   });
 
   Widget _makeTestableWidget(Widget body) {
-    return ChangeNotifierProvider<TvSeriesTopRatedNotifier>.value(
-      value: mockNotifier,
-      child: MaterialApp(
-        home: body,
-      ),
-    );
+    return BlocProvider<TvsTopRatedBloc>(create: (_) => mockTvsTopRatedBloc, child: MaterialApp(home: body,),);
   }
 
-  testWidgets('Page should display progress bar when loading',
-      (WidgetTester tester) async {
-    when(mockNotifier.state).thenReturn(RequestState.Loading);
+  testWidgets('Page should display center progress bar when loading',
+          (WidgetTester tester) async {
+        when(() => mockTvsTopRatedBloc.state).thenReturn(TvsTopRatedLoading());
 
-    final progressFinder = find.byType(CircularProgressIndicator);
-    final centerFinder = find.byType(Center);
+        final progressFinder = find.byType(CircularProgressIndicator);
+        final centerFinder = find.byType(Center);
 
-    await tester.pumpWidget(_makeTestableWidget(const TvSeriesTopRatedPage()));
+        await tester.pumpWidget(_makeTestableWidget(const TvSeriesTopRatedPage()));
 
-    expect(centerFinder, findsOneWidget);
-    expect(progressFinder, findsOneWidget);
-  });
+        expect(centerFinder, findsOneWidget);
+        expect(progressFinder, findsOneWidget);
+      });
 
-  testWidgets('Page should display when data is loaded',
-      (WidgetTester tester) async {
-    when(mockNotifier.state).thenReturn(RequestState.Loaded);
-    when(mockNotifier.tv).thenReturn(<TvSeries>[]);
+  testWidgets('Page should display ListView when data is HasData',
+          (WidgetTester tester) async {
+        when(() => mockTvsTopRatedBloc.state).thenReturn(const TvsTopRatedHasData(<TvSeries>[]));
 
-    final listViewFinder = find.byType(ListView);
+        final listViewFinder = find.byType(ListView);
 
-    await tester.pumpWidget(_makeTestableWidget(const TvSeriesTopRatedPage()));
+        await tester.pumpWidget(_makeTestableWidget(const TvSeriesTopRatedPage()));
 
-    expect(listViewFinder, findsOneWidget);
-  });
+        expect(listViewFinder, findsOneWidget);
+      });
 
-  testWidgets('Page should display text with message when Error',
-      (WidgetTester tester) async {
-    when(mockNotifier.state).thenReturn(RequestState.HasError);
-    when(mockNotifier.message).thenReturn('Error message');
+  testWidgets('Page should display text with message when HasError',
+          (WidgetTester tester) async {
+        when(() => mockTvsTopRatedBloc.state).thenReturn(const TvsTopRatedHasError('Error Message'));
 
-    final textFinder = find.byKey(const Key('error_message'));
+        final textFinder = find.byKey(const Key('error_message'));
 
-    await tester.pumpWidget(_makeTestableWidget(const TvSeriesTopRatedPage()));
+        await tester.pumpWidget(_makeTestableWidget(const TvSeriesTopRatedPage()));
 
-    expect(textFinder, findsOneWidget);
-  });
+        expect(textFinder, findsOneWidget);
+      });
 }

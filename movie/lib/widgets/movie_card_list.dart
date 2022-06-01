@@ -3,10 +3,9 @@ import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:movie/movie.dart';
 
-
 class MovieCard extends StatelessWidget {
   final Movie movie;
-
+  
   MovieCard(this.movie);
 
   @override

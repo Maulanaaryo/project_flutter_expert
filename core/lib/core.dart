@@ -12,3 +12,5 @@ export 'utils/utils.dart';
 export 'data/genre_model.dart';
 
 export 'domain/genre.dart';
+
+export 'widgets/splash_screen.dart';

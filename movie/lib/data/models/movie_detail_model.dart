@@ -3,7 +3,6 @@ import 'package:equatable/equatable.dart';
 import 'package:movie/movie.dart';
 
 class MovieDetailResponse extends Equatable {
-  
   const MovieDetailResponse({
     required this.adult,
     required this.backdropPath,

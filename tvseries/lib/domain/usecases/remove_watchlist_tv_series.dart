@@ -3,6 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:tvseries/tvseries.dart';
 
 class RemoveWatchlistTvSeries {
+  
   final TvRepository repository;
 
   RemoveWatchlistTvSeries(this.repository);

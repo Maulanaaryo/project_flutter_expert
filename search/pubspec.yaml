@@ -11,9 +11,12 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  equatable: ^2.0.3
+  http: ^0.13.3
   dartz: ^0.10.0
   provider: ^6.0.3 
   rxdart: ^0.27.3
+  flutter_bloc: ^8.0.1
 
   about:
     path: ../about
@@ -29,8 +32,10 @@ dev_dependencies:
     sdk: flutter
   flutter_lints: ^2.0.0
   mockito: ^5.2.0
+  mocktail: ^0.3.0
   build_runner: ^2.1.11
   test_cov_console: ^0.2.2
+  bloc_test: ^9.0.3
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

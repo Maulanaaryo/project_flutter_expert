@@ -3,6 +3,7 @@ import 'package:dartz/dartz.dart';
 import 'package:tvseries/tvseries.dart';
 
 class GetPopularTvSeries {
+
   final TvRepository repository;
 
   GetPopularTvSeries(this.repository);

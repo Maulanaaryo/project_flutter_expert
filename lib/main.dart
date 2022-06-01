@@ -2,6 +2,7 @@ import 'package:about/about.dart';
 import 'package:core/core.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/movie.dart';
 import 'package:provider/provider.dart';
 import 'package:ditonton/injection.dart' as di;
@@ -19,41 +20,50 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(
-          create: (_) => di.locator<MovieListNotifier>(),
+        // Bloc Movie
+        BlocProvider(
+          create: (_) => di.locator<MoviesSearchBloc>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<MovieDetailNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<MoviesDetailBloc>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<MovieSearchNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<MoviesNowPlayingBloc>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TopRatedMoviesNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<MoviesPopularBloc>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<PopularMoviesNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<MoviesRecommendationBloc>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<WatchlistMovieNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<MoviesTopRatedBloc>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TvListNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<MoviesWatchlistBloc>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TvSeriesDetailNotifier>(),
+
+        // Bloc Tvseries
+        BlocProvider(
+          create: (_) => di.locator<TvsSearchBloc>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TvSeriesSearchNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<TvsDetailBloc>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TvSeriesTopRatedNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<TvsOnAirBloc>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TvSeriesPopularNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<TvsPopularBloc>(),
         ),
-        ChangeNotifierProvider(
-          create: (_) => di.locator<TvSeriesWatchlistNotifier>(),
+        BlocProvider(
+          create: (_) => di.locator<TvsRecommendationBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<TvsTopRatedBloc>(),
+        ),
+        BlocProvider(
+          create: (_) => di.locator<TvsWatchlistBloc>(),
         ),
       ],
       child: MaterialApp(
@@ -104,7 +114,7 @@ class MyApp extends StatelessWidget {
             case AboutPage.routeName:
               return MaterialPageRoute(builder: (_) => AboutPage());
             case SplashScreen.routeName:
-            return MaterialPageRoute(builder: (_) => SplashScreen());
+              return MaterialPageRoute(builder: (_) => SplashScreen());
             default:
               return MaterialPageRoute(builder: (_) {
                 return Scaffold(

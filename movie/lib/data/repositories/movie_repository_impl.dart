@@ -17,9 +17,11 @@ class MovieRepositoryImpl implements MovieRepository {
     try {
       final result = await remoteDataSource.getNowPlayingMovies();
       return Right(result.map((model) => model.toEntity()).toList());
-    } on ServerException {
+    } 
+    on ServerException {
       return const Left(ServerFailure(''));
-    } on SocketException {
+    } 
+    on SocketException {
       return const Left(ConnectionFailure('Failed to connect to the network'));
     }
   }
@@ -29,9 +31,11 @@ class MovieRepositoryImpl implements MovieRepository {
     try {
       final result = await remoteDataSource.getMovieDetail(id);
       return Right(result.toEntity());
-    } on ServerException {
+    } 
+    on ServerException {
       return const Left(ServerFailure(''));
-    } on SocketException {
+    } 
+    on SocketException {
       return const Left(ConnectionFailure('Failed to connect to the network'));
     }
   }
@@ -41,9 +45,11 @@ class MovieRepositoryImpl implements MovieRepository {
     try {
       final result = await remoteDataSource.getMovieRecommendations(id);
       return Right(result.map((model) => model.toEntity()).toList());
-    } on ServerException {
+    } 
+    on ServerException {
       return const Left(ServerFailure(''));
-    } on SocketException {
+    } 
+    on SocketException {
       return const Left(ConnectionFailure('Failed to connect to the network'));
     }
   }
@@ -53,9 +59,11 @@ class MovieRepositoryImpl implements MovieRepository {
     try {
       final result = await remoteDataSource.getPopularMovies();
       return Right(result.map((model) => model.toEntity()).toList());
-    } on ServerException {
+    } 
+    on ServerException {
       return const Left(ServerFailure(''));
-    } on SocketException {
+    } 
+    on SocketException {
       return const Left(ConnectionFailure('Failed to connect to the network'));
     }
   }
@@ -65,9 +73,11 @@ class MovieRepositoryImpl implements MovieRepository {
     try {
       final result = await remoteDataSource.getTopRatedMovies();
       return Right(result.map((model) => model.toEntity()).toList());
-    } on ServerException {
+    } 
+    on ServerException {
       return const Left(ServerFailure(''));
-    } on SocketException {
+    } 
+    on SocketException {
       return const Left(ConnectionFailure('Failed to connect to the network'));
     }
   }
@@ -77,9 +87,11 @@ class MovieRepositoryImpl implements MovieRepository {
     try {
       final result = await remoteDataSource.searchMovies(query);
       return Right(result.map((model) => model.toEntity()).toList());
-    } on ServerException {
+    } 
+    on ServerException {
       return const Left(ServerFailure(''));
-    } on SocketException {
+    } 
+    on SocketException {
       return const Left(ConnectionFailure('Failed to connect to the network'));
     }
   }
@@ -90,9 +102,11 @@ class MovieRepositoryImpl implements MovieRepository {
       final result =
           await localDataSource.insertWatchlist(MovieTable.fromEntity(movie));
       return Right(result);
-    } on DatabaseException catch (e) {
+    } 
+    on DatabaseException catch (e) {
       return Left(DatabaseFailure(e.message));
-    } catch (e) {
+    } 
+    catch (e) {
       throw e;
     }
   }
@@ -103,7 +117,8 @@ class MovieRepositoryImpl implements MovieRepository {
       final result =
           await localDataSource.removeWatchlist(MovieTable.fromEntity(movie));
       return Right(result);
-    } on DatabaseException catch (e) {
+    } 
+    on DatabaseException catch (e) {
       return Left(DatabaseFailure(e.message));
     }
   }
@@ -111,12 +126,14 @@ class MovieRepositoryImpl implements MovieRepository {
   @override
   Future<bool> isAddedToWatchlist(int id) async {
     final result = await localDataSource.getMovieById(id);
+
     return result != null;
   }
 
   @override
   Future<Either<Failure, List<Movie>>> getWatchlistMovies() async {
     final result = await localDataSource.getWatchlistMovies();
+    
     return Right(result.map((data) => data.toEntity()).toList());
   }
 }

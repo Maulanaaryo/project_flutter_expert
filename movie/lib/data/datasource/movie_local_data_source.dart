@@ -8,6 +8,7 @@ abstract class MovieLocalDataSource {
   Future<String> removeWatchlist(MovieTable movie);
   Future<MovieTable?> getMovieById(int id);
   Future<List<MovieTable>> getWatchlistMovies();
+
 }
 
 class MovieLocalDataSourceImpl implements MovieLocalDataSource {
@@ -22,7 +23,8 @@ class MovieLocalDataSourceImpl implements MovieLocalDataSource {
       return 'Added to Watchlist';
     }
     catch (e) {
-      throw DatabaseException(e.toString());
+      throw DatabaseException(e.toString(),
+      );
     }
   }
 
@@ -33,7 +35,8 @@ class MovieLocalDataSourceImpl implements MovieLocalDataSource {
       return 'Removed from Watchlist';
     } 
     catch (e) {
-      throw DatabaseException(e.toString());
+      throw DatabaseException(e.toString(),
+      );
     }
   }
 

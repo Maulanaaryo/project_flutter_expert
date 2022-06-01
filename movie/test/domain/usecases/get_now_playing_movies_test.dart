@@ -3,7 +3,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/mockito.dart';
 import 'package:movie/movie.dart';
 
-import '../../helpers/test_helper.mocks.dart';
+import '../../helpers/helper_test.mocks.dart';
 
 void main() {
   late GetNowPlayingMovies usecase;

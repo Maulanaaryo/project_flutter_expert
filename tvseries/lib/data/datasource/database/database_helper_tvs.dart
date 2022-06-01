@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:sqflite/sqflite.dart';
 import 'package:tvseries/tvseries.dart';
 
@@ -53,22 +52,21 @@ class TvDatabaseHelper {
 
     return await db!.delete(
       _tblWatchlisttv,
-      where: 'id = ?', 
+      where: 'id = ?',
       whereArgs: [tv.id],
     );
   }
 
-  Future<Map<String, dynamic>?>getTvById(int id) async {
+  Future<Map<String, dynamic>?> getTvById(int id) async {
     final db = await databasetv;
-    final results = await db!.query(     
-      _tblWatchlisttv, 
-      where: 'id = ?', 
+    final results = await db!.query(
+      _tblWatchlisttv,
+      where: 'id = ?',
       whereArgs: [id],
     );
     if (results.isNotEmpty) {
       return results.first;
-    }
-    else {
+    } else {
       return null;
     }
   }

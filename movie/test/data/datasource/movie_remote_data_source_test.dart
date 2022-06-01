@@ -6,7 +6,7 @@ import 'package:http/http.dart' as http;
 import 'package:mockito/mockito.dart';
 import 'package:movie/movie.dart';
 
-import '../../helpers/test_helper.mocks.dart';
+import '../../helpers/helper_test.mocks.dart';
 import '../../json_reader.dart';
 
 void main() {

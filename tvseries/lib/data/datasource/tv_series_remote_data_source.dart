@@ -1,11 +1,9 @@
 import 'dart:convert';
-
 import 'package:core/core.dart';
 import 'package:http/http.dart' as http;
 import 'package:tvseries/tvseries.dart';
 
 abstract class TvsRemoteDataSource {
-
   Future<List<TvSeriesModel>> getNowPlayingTvSeries();
   Future<List<TvSeriesModel>> getTopRatedTvSeries();
   Future<List<TvSeriesModel>> getPopularTvSeries();
@@ -26,7 +24,7 @@ class TvsRemoteDataSourceImpl implements TvsRemoteDataSource {
     final response = await client.get(
       Uri.parse('$baseUrl/tv/on_the_air?$apiKey'),
     );
-
+    
     if (response.statusCode == 200) {
       return TvSeriesResponse.fromJson(json.decode(response.body)).tvSeriesList;
     } 

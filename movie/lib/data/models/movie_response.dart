@@ -1,5 +1,4 @@
 import 'package:equatable/equatable.dart';
-
 import 'package:movie/movie.dart';
 
 class MovieResponse extends Equatable {
