@@ -8,7 +8,6 @@ import 'package:provider/provider.dart';
 import 'package:ditonton/injection.dart' as di;
 import 'package:search/search.dart';
 import 'package:tvseries/tvseries.dart';
-import 'splash_screen.dart';
 
 void main() {
   di.init();
