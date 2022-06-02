@@ -48,7 +48,6 @@ class HttpSSLPinnings {
     HttpClient httpClient = HttpClient(context: context);
     httpClient.badCertificateCallback =
         (X509Certificate cert, String host, int port) => false;
-
     return httpClient;
   }
 

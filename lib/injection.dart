@@ -1,5 +1,4 @@
 import 'package:core/core.dart';
-import 'package:http/http.dart' as http;
 import 'package:get_it/get_it.dart';
 import 'package:movie/movie.dart';
 import 'package:search/search.dart';
