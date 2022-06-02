@@ -4,7 +4,6 @@ import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/movie.dart';
-import 'package:provider/provider.dart';
 import 'package:search/search.dart';
 import 'package:tvseries/tvseries.dart';
 
@@ -199,11 +198,11 @@ class _TvSeriesHomePageState extends State<TvSeriesHomePage> {
 class TvList extends StatelessWidget {
   final List<TvSeries> tv;
 
-  TvList(this.tv);
+  const TvList(this.tv, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 200,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,

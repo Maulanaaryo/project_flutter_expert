@@ -9,7 +9,7 @@ class TvSeriesDetailPage extends StatefulWidget {
   static const routeName = '/detail-tv-series';
 
   final int id;
-  TvSeriesDetailPage({required this.id});
+  const TvSeriesDetailPage({Key? key, required this.id}) : super(key: key);
 
   @override
   _TvSeriesDetailPageState createState() => _TvSeriesDetailPageState();
@@ -35,7 +35,13 @@ class _TvSeriesDetailPageState extends State<TvSeriesDetailPage> {
     TvsRecommendationState tvsRecommendationState =
         context.watch<TvsRecommendationBloc>().state;
     return Scaffold(
-      body: BlocBuilder<TvsDetailBloc, TvsDetailState>(
+      body: BlocListener<TvsWatchlistBloc, TvsWatchlistState>(listener: (_, state) {
+        if (state is TvsWatchlistSuccess) {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(state.message),),);
+          context.read<TvsWatchlistBloc>().add(TvsGetIdWatchlistStatusEvent(widget.id));
+        }
+      },
+      child: BlocBuilder<TvsDetailBloc, TvsDetailState>(
         builder: (context, state) {
           if (state is TvsDetailLoading) {
             return const Center(
@@ -69,7 +75,7 @@ class _TvSeriesDetailPageState extends State<TvSeriesDetailPage> {
           }
         },
       ),
-    );
+    ),);
   }
 }
 
@@ -78,7 +84,7 @@ class DetailContent extends StatelessWidget {
   final List<TvSeries> recommendations;
   final bool isAddedWatchlistTv;
 
-  DetailContent(this.tv, this.recommendations, this.isAddedWatchlistTv);
+  const DetailContent(this.tv, this.recommendations, this.isAddedWatchlistTv, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

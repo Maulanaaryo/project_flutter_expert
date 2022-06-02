@@ -9,7 +9,9 @@ import 'package:ditonton/injection.dart' as di;
 import 'package:search/search.dart';
 import 'package:tvseries/tvseries.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await HttpSSLPinnings.init();
   di.init();
   runApp(MyApp());
 }
@@ -77,6 +79,7 @@ class MyApp extends StatelessWidget {
         navigatorObservers: [routeObserver],
         onGenerateRoute: (RouteSettings settings) {
           switch (settings.name) {
+            // movie
             case '/home':
               return MaterialPageRoute(builder: (_) => HomeMoviePage());
             case PopularMoviesPage.routeName:
@@ -89,6 +92,8 @@ class MyApp extends StatelessWidget {
                 builder: (_) => MovieDetailPage(id: id),
                 settings: settings,
               );
+
+            // tv series
             case '/tv-home-series':
               return MaterialPageRoute(builder: (_) => TvSeriesHomePage());
             case TvSeriesPopularPage.routeName:
@@ -115,13 +120,15 @@ class MyApp extends StatelessWidget {
             case SplashScreen.routeName:
               return MaterialPageRoute(builder: (_) => SplashScreen());
             default:
-              return MaterialPageRoute(builder: (_) {
-                return Scaffold(
-                  body: Center(
-                    child: Text('Page not found :('),
-                  ),
-                );
-              });
+              return MaterialPageRoute(
+                builder: (_) {
+                  return Scaffold(
+                    body: Center(
+                      child: Text('Page not found :('),
+                    ),
+                  );
+                },
+              );
           }
         },
       ),

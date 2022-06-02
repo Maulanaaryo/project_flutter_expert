@@ -24,6 +24,9 @@ class MovieRepositoryImpl implements MovieRepository {
     on SocketException {
       return const Left(ConnectionFailure('Failed to connect to the network'));
     }
+    on TlsException {
+      return const Left(CommonFailure('invalid certificate'));
+    }
   }
 
   @override
@@ -37,6 +40,9 @@ class MovieRepositoryImpl implements MovieRepository {
     } 
     on SocketException {
       return const Left(ConnectionFailure('Failed to connect to the network'));
+    }
+    on TlsException {
+      return const Left(CommonFailure('invalid certificate'));
     }
   }
 
@@ -52,6 +58,9 @@ class MovieRepositoryImpl implements MovieRepository {
     on SocketException {
       return const Left(ConnectionFailure('Failed to connect to the network'));
     }
+    on TlsException {
+      return const Left(CommonFailure('invalid certificate'));
+    }
   }
 
   @override
@@ -65,6 +74,9 @@ class MovieRepositoryImpl implements MovieRepository {
     } 
     on SocketException {
       return const Left(ConnectionFailure('Failed to connect to the network'));
+    }
+    on TlsException {
+      return const Left(CommonFailure('invalid certificate'));
     }
   }
 
@@ -80,6 +92,9 @@ class MovieRepositoryImpl implements MovieRepository {
     on SocketException {
       return const Left(ConnectionFailure('Failed to connect to the network'));
     }
+    on TlsException {
+      return const Left(CommonFailure('invalid certificate'));
+    }
   }
 
   @override
@@ -93,6 +108,9 @@ class MovieRepositoryImpl implements MovieRepository {
     } 
     on SocketException {
       return const Left(ConnectionFailure('Failed to connect to the network'));
+    }
+    on TlsException {
+      return const Left(CommonFailure('invalid certificate'));
     }
   }
 

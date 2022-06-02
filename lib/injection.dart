@@ -1,3 +1,4 @@
+import 'package:core/core.dart';
 import 'package:http/http.dart' as http;
 import 'package:get_it/get_it.dart';
 import 'package:movie/movie.dart';
@@ -7,6 +8,7 @@ import 'package:tvseries/tvseries.dart';
 final locator = GetIt.instance;
 
 void init() {
+
   // Bloc Movie
   locator.registerFactory(
     () => MoviesSearchBloc(
@@ -98,6 +100,7 @@ void init() {
   locator.registerLazySingleton(() => SaveWatchlist(locator()));
   locator.registerLazySingleton(() => RemoveWatchlist(locator()));
   locator.registerLazySingleton(() => GetWatchlistMovies(locator()));
+
   // use case tv
   locator.registerLazySingleton(() => GetNowPlayingTvSeries(locator()));
   locator.registerLazySingleton(() => GetPopularTvSeries(locator()));
@@ -117,6 +120,7 @@ void init() {
       localDataSource: locator(),
     ),
   );
+
   //repository tv
   locator.registerLazySingleton<TvRepository>(
     () => TvsRepositoryImpl(
@@ -130,6 +134,7 @@ void init() {
       () => MovieRemoteDataSourceImpl(client: locator()));
   locator.registerLazySingleton<MovieLocalDataSource>(
       () => MovieLocalDataSourceImpl(databaseHelper: locator()));
+
   // data source tv
   locator.registerLazySingleton<TvsRemoteDataSource>(
       () => TvsRemoteDataSourceImpl(client: locator()));
@@ -138,9 +143,10 @@ void init() {
 
   // helper movie
   locator.registerLazySingleton<DatabaseHelper>(() => DatabaseHelper());
+  
   // helper tv
   locator.registerLazySingleton<TvDatabaseHelper>(() => TvDatabaseHelper());
 
   // external
-  locator.registerLazySingleton(() => http.Client());
+  locator.registerLazySingleton(() => HttpSSLPinnings.client);
 }
