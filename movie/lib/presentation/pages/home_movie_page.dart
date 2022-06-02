@@ -1,6 +1,7 @@
 import 'package:about/about.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:core/core.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:movie/movie.dart';
@@ -53,21 +54,20 @@ class _HomeMoviePageState extends State<HomeMoviePage> {
                 Navigator.pushNamed(context, TvSeriesHomePage.routeName);
               },
             ),
-                ListTile(
-                  leading: const Icon(Icons.move_to_inbox_rounded),
-                  title: const Text('All Watchlist Movie'),
-                  onTap: () {
-                    Navigator.pushNamed(context, WatchlistMoviesPage.routeName);
-                  },
-                ),
-                ListTile(
-                  leading: const Icon(Icons.how_to_vote_rounded),
-                  title: const Text('All Watchlist Tv'),
-                  onTap: () {
-                    Navigator.pushNamed(
-                        context, TvSeriesWatchlistPage.routeName);
-                  },
-                ),
+            ListTile(
+              leading: const Icon(Icons.move_to_inbox_rounded),
+              title: const Text('All Watchlist Movie'),
+              onTap: () {
+                Navigator.pushNamed(context, WatchlistMoviesPage.routeName);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.how_to_vote_rounded),
+              title: const Text('All Watchlist Tv'),
+              onTap: () {
+                Navigator.pushNamed(context, TvSeriesWatchlistPage.routeName);
+              },
+            ),
             ListTile(
               onTap: () {
                 Navigator.pushNamed(context, AboutPage.routeName);
